@@ -57,21 +57,21 @@ module "iks_addon_policy" {
   tags      = var.tags
 }
 
-locals {
-  infra_config_polices_map = {
-    for val in var.infra_config_polices :
-      val.vmConfig.policyName => val
-  }
-}
-
-module "iks_infra_config" {
-  source = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
-  for_each = local.infra_config_polices_map #toset(var.infra_config_polices)
-
-  org_name	= var.org_name
-  tags      = var.tags
-  vmConfig  = each.value.vmConfig
-}
+# locals {
+#   infra_config_polices_map = {
+#     for val in var.infra_config_polices :
+#       val.vmConfig.policyName => val
+#   }
+# }
+#
+# module "iks_infra_config" {
+#   source = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
+#   for_each = local.infra_config_polices_map #toset(var.infra_config_polices)
+#
+#   org_name	= var.org_name
+#   tags      = var.tags
+#   vmConfig  = each.value.vmConfig
+# }
 
 locals {
   ip_pool_policies_map = {
@@ -119,7 +119,7 @@ module "iks_network_policy" {
 locals {
   sysconfig_policies_map = {
     for val in var.sysconfig_policies :
-      val.policy_name => val
+      val.name => val
   }
 }
 
@@ -132,7 +132,7 @@ module "iks_system_policy" {
   domain_name	= each.value.domain_name
   ntp_servers	= each.value.ntp_servers
   org_name	  = var.org_name
-  policy_name	= each.value.policy_name
+  policy_name = each.value.name
   tags        = var.tags
   timezone    = each.value.timezone
 }

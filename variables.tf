@@ -35,28 +35,31 @@ variable "version_policies" {
     versionName    = optional(string)
   }))
 }
-variable "infra_config_polices" {
-  type = list(object({
-    # use_existing       = bool
-    vmConfig = object({
-      platformType       = optional(string)
-      targetName         = optional(string)
-      policyName         = string
-      description        = optional(string)
-      interfaces         = optional(list(string))
-      diskMode           = optional(string)
-      vcTargetName       = optional(string)
-      vcClusterName      = optional(string)
-      vcDatastoreName    = optional(string)
-      vcResourcePoolName = optional(string)
-      vcPassword         = optional(string)
-      })
-  }))
-  sensitive = true
-}
+
+# variable "infra_config_polices" {
+#   type = list(object({
+#     # use_existing       = bool
+#     vmConfig = object({
+#       platformType       = optional(string)
+#       targetName         = optional(string)
+#       policyName         = string
+#       description        = optional(string)
+#       interfaces         = optional(list(string))
+#       diskMode           = optional(string)
+#       vcTargetName       = optional(string)
+#       vcClusterName      = optional(string)
+#       vcDatastoreName    = optional(string)
+#       vcResourcePoolName = optional(string)
+#       vcPassword         = optional(string)
+#       })
+#   }))
+#   sensitive = true
+# }
+
 variable "instance_type_policies" {
   type = list(object({
     # use_existing = bool
+    description  = optional(string)
     name         = string
     cpu          = optional(number)
     memory       = optional(number)
@@ -104,12 +107,13 @@ variable "addon_policies" {
 variable "ip_pool_policies" {
   type = list(object({
     # use_existing        = bool
-    name                = string
-    ip_starting_address = optional(string)
-    ip_pool_size        = optional(string)
-    ip_netmask          = optional(string)
-    ip_gateway          = optional(string)
-    dns_servers         = optional(list(string))
+    name             = string
+    starting_address = optional(string)
+    pool_size        = optional(string)
+    netmask          = optional(string)
+    gateway          = optional(string)
+    primary_dns      = optional(string)
+    secondary_dns    = optional(string)
   }))
 }
 
@@ -136,7 +140,7 @@ variable "trusted_registry_polices" {
 variable "sysconfig_policies" {
   type = list(object({
     # use_existing = bool
-    name         = string
+    policy_name  = string
     ntp_servers  = optional(list(string))
     dns_servers  = optional(list(string))
     timezone     = optional(string)

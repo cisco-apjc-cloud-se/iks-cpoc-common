@@ -1,7 +1,6 @@
 ip_pool_policies = [
   {
   name                = "tf-iks-asr-gw"
-  description         = "IP pool with default gateway set to ASR not ACI"
   ip_starting_address = "100.64.62.200"
   ip_pool_size        = "20"
   ip_netmask          = "255.255.255.0"
@@ -13,7 +12,7 @@ ip_pool_policies = [
 sysconfig_policies = [
   {
     # a.k.a Node OS Configuration
-    name         = "tf-iks-cpoc-sysconfig"
+    policy_name  = "tf-iks-cpoc-sysconfig"
     description  = "System config settings for Sydney CPOC DMZ"
     # domain_name = ""
     timezone     = "Australia/Sydney"
@@ -45,7 +44,7 @@ trusted_registry_polices = []
 
 runtime_policies = []
 
-infra_config_polices = []
+# infra_config_polices = []
 
 addon_policies = [
   {
