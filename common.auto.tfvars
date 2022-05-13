@@ -42,9 +42,9 @@ version_policies = [
 
 trusted_registry_polices = []
 
-runtime_policies = []
+# runtime_policies = []     # Sensitive!
 
-# infra_config_polices = []
+# infra_config_polices = [] # Sensitive!
 
 addon_policies = [
   {

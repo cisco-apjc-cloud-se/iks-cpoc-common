@@ -67,25 +67,25 @@ variable "instance_type_policies" {
   }))
 }
 
-variable "runtime_policies" {
-  type = list(object({
-    # use_existing         = bool
-    create_new           = bool
-    name                 = optional(string)
-    http_proxy_hostname  = optional(string)
-    http_proxy_port      = optional(number)
-    http_proxy_protocol  = optional(string)
-    http_proxy_username  = optional(string)
-    http_proxy_password  = optional(string)
-    https_proxy_hostname = optional(string)
-    https_proxy_port     = optional(number)
-    https_proxy_protocol = optional(string)
-    https_proxy_username = optional(string)
-    https_proxy_password = optional(string)
-    docker_no_proxy      = optional(list(string))
-  }))
-  sensitive = true
-}
+# variable "runtime_policies" {
+#   type = list(object({
+#     # use_existing         = bool
+#     create_new           = bool
+#     name                 = optional(string)
+#     http_proxy_hostname  = optional(string)
+#     http_proxy_port      = optional(number)
+#     http_proxy_protocol  = optional(string)
+#     http_proxy_username  = optional(string)
+#     http_proxy_password  = optional(string)
+#     https_proxy_hostname = optional(string)
+#     https_proxy_port     = optional(number)
+#     https_proxy_protocol = optional(string)
+#     https_proxy_username = optional(string)
+#     https_proxy_password = optional(string)
+#     docker_no_proxy      = optional(list(string))
+#   }))
+#   sensitive = true
+# }
 
 variable "addon_policies" {
   type = list(object({
@@ -108,6 +108,7 @@ variable "ip_pool_policies" {
   type = list(object({
     # use_existing        = bool
     name             = string
+    description      = optional(string)
     starting_address = optional(string)
     pool_size        = optional(string)
     netmask          = optional(string)
@@ -120,10 +121,11 @@ variable "ip_pool_policies" {
 variable "k8s_network_policies" {
   type = list(object({
     # use_existing = bool
-    name         = optional(string)
+    policy_name  = string
+    description  = optional(string)
     pod_cidr     = optional(string)
     service_cidr = optional(string)
-    cni          = optional(string)
+    cni          = optional(string)    
   }))
 }
 
