@@ -1,3 +1,18 @@
+### Intersight - Common Variables
+
+variable "intersight_key" {
+  type = string
+}
+
+variable "intersight_secret" {
+  type = string
+}
+
+variable "intersight_url" {
+  type = string
+  default = "https://intersight.com"
+}
+
 variable "org_name" {
   type = string
   default = "default"
@@ -8,6 +23,8 @@ variable "tags" {
   default     = []
   description = "Tags to be associated with this object in Intersight."
 }
+
+### Intersight Kubernetes Policies as List of Objects ###
 
 variable "version_policies" {
   type = list(object({
