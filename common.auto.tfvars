@@ -55,7 +55,7 @@ addon_policies = [
     upgradeStrategy   = "UpgradeOnly"
     installStrategy   = "InstallOnly"
     releaseVersion    = "1.8.2-cisco5-helm3" #"1.8.2-cisco2-helm3"
-    overrides         = yamlencode({"demoApplication":{"enabled":false}})
+    overrides         = "yamlencode({"demoApplication":{"enabled":false}})" ## Quote function
   }
 ]
 
