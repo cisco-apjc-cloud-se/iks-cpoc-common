@@ -38,17 +38,19 @@ variable "version_policies" {
 variable "infra_config_polices" {
   type = list(object({
     # use_existing       = bool
-    platformType       = optional(string)
-    targetName         = optional(string)
-    policyName         = string
-    description        = optional(string)
-    interfaces         = optional(list(string))
-    diskMode           = optional(string)
-    vcTargetName       = optional(string)
-    vcClusterName      = optional(string)
-    vcDatastoreName    = optional(string)
-    vcResourcePoolName = optional(string)
-    vcPassword         = optional(string)
+    vmConfig = object({
+      platformType       = optional(string)
+      targetName         = optional(string)
+      policyName         = string
+      description        = optional(string)
+      interfaces         = optional(list(string))
+      diskMode           = optional(string)
+      vcTargetName       = optional(string)
+      vcClusterName      = optional(string)
+      vcDatastoreName    = optional(string)
+      vcResourcePoolName = optional(string)
+      vcPassword         = optional(string)
+      })
   }))
   sensitive = true
 }

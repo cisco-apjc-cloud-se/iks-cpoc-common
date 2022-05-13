@@ -30,9 +30,16 @@ data "intersight_organization_organization" "org" {
 
 ## Build Common IKS Policies ##
 
+locals {
+  version_policies_map = {
+    for val in var.version_policies :
+      val.policyName => val
+  }
+}
+
 module "iks_version" {
   source = "terraform-cisco-modules/iks/intersight//modules/version"
-  for_each = toset(var.version_policies)
+  for_each = local.version_policies_map # toset(var.version_policies)
 
   description	    = each.value.description
   iksVersionName	= each.value.iksVersionName
@@ -50,18 +57,32 @@ module "iks_addon_policy" {
   tags      = var.tags
 }
 
+locals {
+  infra_config_polices_map = {
+    for val in var.infra_config_polices :
+      val.vmConfig.policyName => val
+  }
+}
+
 module "iks_infra_config" {
   source = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
-  for_each = toset(var.infra_config_polices)
+  for_each = local.infra_config_polices_map #toset(var.infra_config_polices)
 
   org_name	= var.org_name
   tags      = var.tags
   vmConfig  = each.value.vmConfig
 }
 
+locals {
+  ip_pool_policies_map = {
+    for val in var.ip_pool_policies :
+      val.name => val
+  }
+}
+
 module "ip_pool" {
   source = "terraform-cisco-modules/iks/intersight//modules/ip_pool"
-  for_each = toset(var.ip_pool_policies)
+  for_each = local.ip_pool_policies_map #toset(var.ip_pool_policies)
 
   description	      = each.value.description
   gateway	          = each.value.gateway
@@ -75,9 +96,16 @@ module "ip_pool" {
   tags = var.tags
 }
 
+locals {
+  k8s_network_policies_map = {
+    for val in var.k8s_network_policies :
+      val.policy_name => val
+  }
+}
+
 module "iks_network_policy" {
   source = "terraform-cisco-modules/iks/intersight//modules/k8s_network"
-  for_each = toset(var.k8s_network_policies)
+  for_each = local.k8s_network_policies_map #toset(var.k8s_network_policies)
 
   cni	          = each.value.cni
   description	  = each.value.description
@@ -88,9 +116,16 @@ module "iks_network_policy" {
   tags          = var.tags
 }
 
+locals {
+  sysconfig_policies_map = {
+    for val in var.sysconfig_policies :
+      val.policy_name => val
+  }
+}
+
 module "iks_system_policy" {
   source = "terraform-cisco-modules/iks/intersight//modules/k8s_sysconfig"
-  for_each = toset(var.sysconfig_policies)
+  for_each = local.sysconfig_policies_map #toset(var.sysconfig_policies)
 
   description	= each.value.description
   dns_servers	= each.value.dns_servers
@@ -102,9 +137,16 @@ module "iks_system_policy" {
   timezone    = each.value.timezone
 }
 
+locals {
+  runtime_policies_map = {
+    for val in var.runtime_policies :
+      val.name => val
+  }
+}
+
 module "iks_runtime_policy" {
   source = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
-  for_each = toset(var.runtime_policies)
+  for_each = local.runtime_policies_map #toset(var.runtime_policies)
 
   description	          = each.value.description
   docker_bridge_cidr    = each.value.docker_bridge_cidr
@@ -124,9 +166,16 @@ module "iks_runtime_policy" {
   tags                  = var.tags
 }
 
+locals {
+  trusted_registry_polices_map = {
+    for val in var.trusted_registry_polices :
+      val.policy_name => val
+  }
+}
+
 module "iks_registry_policy" {
   source = "terraform-cisco-modules/iks/intersight//modules/trusted_registry"
-  for_each = toset(var.trusted_registry_polices)
+  for_each = local.trusted_registry_polices_map #toset(var.trusted_registry_polices)
 
   description	        = each.value.description
   org_name	          = var.org_name
@@ -136,9 +185,16 @@ module "iks_registry_policy" {
   unsigned_registries = each.value.unsigned_registries
 }
 
+locals {
+  instance_type_policies_map = {
+    for val in var.instance_type_policies :
+      val.name => val
+  }
+}
+
 module "iks_worker_profile" {
   source = "terraform-cisco-modules/iks/intersight//modules/worker_profile"
-  for_each = toset(var.infra_config_polices)
+  for_each = local.instance_type_policies_map #toset(var.instance_type_policies)
 
   cpu	        = each.value.cpu
   description = each.value.description
