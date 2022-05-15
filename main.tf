@@ -64,22 +64,6 @@ module "iks_addon_policy" {
   tags      = var.tags
 }
 
-# locals {
-#   infra_config_polices_map = {
-#     for val in var.infra_config_polices :
-#       val.vmConfig.policyName => val
-#   }
-# }
-#
-# module "iks_infra_config" {
-#   source = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
-#   for_each = local.infra_config_polices_map #toset(var.infra_config_polices)
-#
-#   org_name	= var.org_name
-#   tags      = var.tags
-#   vmConfig  = each.value.vmConfig
-# }
-
 locals {
   ip_pool_policies_map = {
     for val in var.ip_pool_policies :
@@ -144,35 +128,6 @@ module "iks_system_policy" {
   timezone    = each.value.timezone
 }
 
-# locals {
-#   runtime_policies_map = {
-#     for val in var.runtime_policies :
-#       val.name => val
-#   }
-# }
-#
-# module "iks_runtime_policy" {
-#   source = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
-#   for_each = local.runtime_policies_map #toset(var.runtime_policies)
-#
-#   description	          = each.value.description
-#   docker_bridge_cidr    = each.value.docker_bridge_cidr
-#   docker_no_proxy	      = each.value.docker_no_proxy
-#   name                  = each.value.name
-#   org_name	            = var.org_name
-#   proxy_http_hostname	  = each.value.proxy_http_hostname
-#   proxy_http_password	  = each.value.proxy_http_password
-#   proxy_http_port	      = each.value.proxy_http_port
-#   proxy_http_protocol	  = each.value.proxy_http_protocol
-#   proxy_http_username	  = each.value.proxy_http_username
-#   proxy_https_hostname  = each.value.proxy_https_hostname
-#   proxy_https_password	= each.value.proxy_https_password
-#   proxy_https_port	    = each.value.proxy_https_port
-#   proxy_https_protocol	= each.value.proxy_https_protocol
-#   proxy_https_username	= each.value.proxy_https_username
-#   tags                  = var.tags
-# }
-
 locals {
   trusted_registry_polices_map = {
     for val in var.trusted_registry_polices :
@@ -211,3 +166,35 @@ module "iks_worker_profile" {
   org_name	  = var.org_name
   tags        = var.tags
 }
+
+### Sensitive Value Policies ####
+# NOTE: Can't use sensitive values and "for_each" iterations
+# Workaround define each policy directly as separate module
+
+# module "iks_runtime_policy" {
+#   source = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
+#
+#   description	          = <input>
+#   docker_bridge_cidr    = <input>
+#   docker_no_proxy	      = <input>
+#   name                  = <input>
+#   org_name	            = var.org_name
+#   proxy_http_hostname	  = <input>
+#   proxy_http_password	  = <input>
+#   proxy_http_port	      = <input>
+#   proxy_http_protocol	  = <input>
+#   proxy_http_username	  = <input>
+#   proxy_https_hostname  = <input>
+#   proxy_https_password	= <input>
+#   proxy_https_port	    = <input>
+#   proxy_https_protocol	= <input>
+#   proxy_https_username	= <input>
+#   tags                  = var.tags
+# }
+
+# module "iks_infra_config" {
+#   source = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
+#   org_name	= var.org_name
+#   tags      = var.tags
+#   vmConfig  = <input>
+# }
