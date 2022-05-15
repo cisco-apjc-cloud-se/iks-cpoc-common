@@ -90,7 +90,7 @@ variable "instance_type_policies" {
 variable "addon_policies" {
   type = list(object({
     # createNew        = bool
-    addonPolicyName  = optional(string)
+    policyName       = optional(string)
     addonName        = optional(string)
     description      = optional(string)
     upgradeStrategy  = optional(string)

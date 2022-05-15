@@ -48,7 +48,7 @@ trusted_registry_polices = []
 
 addon_policies = [
   {
-    addonPolicyName   = "tf-smm-1-8-2"
+    policyName        = "tf-smm-1-8-2"
     addonName         = "smm"
     description       = "Terraform-built SMM Policy"
     upgradeStrategy   = "UpgradeOnly"
