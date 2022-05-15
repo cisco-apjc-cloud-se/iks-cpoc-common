@@ -23,7 +23,7 @@ sysconfig_policies = [
 
 k8s_network_policies = [
   {
-    name         = "tf-calico-172"
+    policy_name  = "tf-calico-172"
     description  = "Calico CNI with default CIDRs"
     pod_cidr     = "172.31.0.0/16" # Default
     service_cidr = "172.30.0.0/16" # Default

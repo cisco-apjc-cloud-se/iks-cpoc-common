@@ -125,7 +125,7 @@ variable "k8s_network_policies" {
     description  = optional(string)
     pod_cidr     = optional(string)
     service_cidr = optional(string)
-    cni          = optional(string)    
+    cni          = optional(string)
   }))
 }
 
@@ -143,6 +143,7 @@ variable "sysconfig_policies" {
   type = list(object({
     # use_existing = bool
     policy_name  = string
+    description  = optional(string)
     ntp_servers  = optional(list(string))
     dns_servers  = optional(list(string))
     timezone     = optional(string)

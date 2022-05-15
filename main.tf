@@ -48,9 +48,16 @@ module "iks_version" {
   tags            = var.tags
 }
 
+locals {
+  addon_policies_map = {
+    for val in var.addon_policies :
+      val.addon.addonName => val
+  }
+}
+
 module "iks_addon_policy" {
   source = "terraform-cisco-modules/iks/intersight//modules/addon_policy"
-  for_each = var.addon_policies
+  for_each = local.addon_policies_map #var.addon_policies
 
   addon	    = each.value
   org_name  = var.org_name
