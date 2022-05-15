@@ -51,7 +51,7 @@ module "iks_version" {
 locals {
   addon_policies_map = {
     for val in var.addon_policies :
-      val.addon.addonName => val
+      val.addonName => val
   }
 }
 
