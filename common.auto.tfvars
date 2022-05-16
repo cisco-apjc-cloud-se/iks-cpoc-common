@@ -36,8 +36,8 @@ k8s_network_policies = [
 version_policies = [
   {
     description     = "K8S 1.20 - Required for AppD-IWO Interop"
-    policyName      = "tf-iks-1-20-1" #"tf-iks-ob-latest"
-    iksVersionName  = "1.20.14-iks.1" # "1.21.10-iks.0"
+    policyName      = "tf-iks-1-20-4" #"tf-iks-ob-latest"
+    iksVersionName  = "1.20.14-iks.4" # "1.21.10-iks.0"
   }
 ]
 
