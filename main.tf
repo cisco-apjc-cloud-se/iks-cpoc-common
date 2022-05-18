@@ -184,7 +184,7 @@ module "iks_infra_config" {
     interfaces         = ["tf-aci-cpoc|dmz|iks-1"]
     vcClusterName      = "CPOC-HX"
     vcDatastoreName    = "CPOC-HX"
-    # vcResourcePoolName = ""
+    vcResourcePoolName = ""
     vcPassword         = var.vcenter_password
   }
 }

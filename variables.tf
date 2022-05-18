@@ -23,6 +23,15 @@ variable "vcenter_password" {
   sensitive = true
 }
 
+variable "vcenter_username" { # Not Used but defined in variable set
+  type = string
+}
+
+variable "vcenter_server" { # Not Used but defined in variable set
+  type = string
+}
+
+
 variable "tags" {
   type        = list(map(string))
   default     = []
