@@ -18,6 +18,11 @@ variable "org_name" {
   default = "default"
 }
 
+variable "vcenter_password" {
+  type = string
+  sensitive = true
+}
+
 variable "tags" {
   type        = list(map(string))
   default     = []
@@ -36,25 +41,6 @@ variable "version_policies" {
   }))
 }
 
-# variable "infra_config_polices" {
-#   type = list(object({
-#     # use_existing       = bool
-#     vmConfig = object({
-#       platformType       = optional(string)
-#       targetName         = optional(string)
-#       policyName         = string
-#       description        = optional(string)
-#       interfaces         = optional(list(string))
-#       diskMode           = optional(string)
-#       vcTargetName       = optional(string)
-#       vcClusterName      = optional(string)
-#       vcDatastoreName    = optional(string)
-#       vcResourcePoolName = optional(string)
-#       vcPassword         = optional(string)
-#       })
-#   }))
-#   sensitive = true
-# }
 
 variable "instance_type_policies" {
   type = list(object({
@@ -150,3 +136,22 @@ variable "sysconfig_policies" {
     domain_name  = optional(string)
   }))
 }
+
+# ### Sensitive Variable Definitions - Can't use in list/map ###
+#
+# variable "vmConfig" {
+#   type = object({
+#     platformType       = optional(string)
+#     targetName         = optional(string)
+#     policyName         = string
+#     description        = optional(string)
+#     interfaces         = optional(list(string))
+#     # diskMode           = optional(string)
+#     # vcTargetName       = optional(string)
+#     vcClusterName      = optional(string)
+#     vcDatastoreName    = optional(string)
+#     vcResourcePoolName = optional(string)
+#     vcPassword         = optional(string)
+#   })
+#   sensitive = true
+# }

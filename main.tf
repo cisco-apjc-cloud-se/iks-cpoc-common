@@ -171,6 +171,24 @@ module "iks_worker_profile" {
 # NOTE: Can't use sensitive values and "for_each" iterations
 # Workaround define each policy directly as separate module
 
+module "iks_infra_config" {
+  source = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
+  org_name	= var.org_name
+  tags      = var.tags
+
+  vmConfig = {
+    platformType       = "esxi"
+    targetName         = "100.64.62.20" # vCenter Target
+    policyName         = "tf-iks-aci-dmz"
+    description        = "IKS Demo EPG on ACI Internal VRF"
+    interfaces         = ["tf-aci-cpoc|dmz|iks-1"]
+    vcClusterName      = "CPOC-HX"
+    vcDatastoreName    = "CPOC-HX"
+    # vcResourcePoolName = ""
+    vcPassword         = var.vcenter_password
+  }
+}
+
 # module "iks_runtime_policy" {
 #   source = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
 #
@@ -190,11 +208,4 @@ module "iks_worker_profile" {
 #   proxy_https_protocol	= <input>
 #   proxy_https_username	= <input>
 #   tags                  = var.tags
-# }
-
-# module "iks_infra_config" {
-#   source = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
-#   org_name	= var.org_name
-#   tags      = var.tags
-#   vmConfig  = <input>
 # }
