@@ -1,11 +1,11 @@
 ip_pool_policies = [
   {
-  name             = "tf-iks-ftd-gw"
-  description      = "K8S IP Pool for External Services using FTDv as Gateway"
-  starting_address = "100.64.62.200"
-  pool_size        = "20"
-  netmask          = "255.255.255.0"
-  gateway          = "100.64.62.28"
+  name             = "tf-iks-dmz-gw"
+  description      = "K8S IP Pool for External Services using SE ACI as gateway and FTDv for Internet"
+  starting_address = "100.64.64.19"
+  pool_size        = "10"
+  netmask          = "255.255.255.240"
+  gateway          = "100.64.64.17"
   primary_dns      = "100.64.62.199"
   }
 ]
