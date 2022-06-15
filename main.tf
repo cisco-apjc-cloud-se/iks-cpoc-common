@@ -189,6 +189,24 @@ module "iks_infra_config" {
   }
 }
 
+module "iks_infra_config2" {
+  source = "terraform-cisco-modules/iks/intersight//modules/infra_config_policy"
+  org_name	= var.org_name
+  tags      = var.tags
+
+  vmConfig = {
+    platformType       = "esxi"
+    targetName         = "100.64.62.20" # vCenter Target
+    policyName         = "tf-iks-aci-dmz2"
+    description        = "2nd IKS Demo EPG on ACI Internal VRF"
+    interfaces         = ["tf-aci-cpoc|dmz|iks-2"]
+    vcClusterName      = "CPOC-HX"
+    vcDatastoreName    = "CPOC-HX"
+    vcResourcePoolName = ""
+    vcPassword         = var.vcenter_password
+  }
+}
+
 # module "iks_runtime_policy" {
 #   source = "terraform-cisco-modules/iks/intersight//modules/runtime_policy"
 #
