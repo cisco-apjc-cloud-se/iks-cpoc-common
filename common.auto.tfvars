@@ -8,6 +8,15 @@ ip_pool_policies = [
   gateway          = "100.64.64.17"
   primary_dns      = "100.64.62.199"
   }
+  {
+  name             = "tf-iks-dmz-gw2"
+  description      = "2nd K8S IP Pool for External Services using SE ACI as gateway and FTDv for Internet"
+  starting_address = "100.64.64.35"
+  pool_size        = "10"
+  netmask          = "255.255.255.240"
+  gateway          = "100.64.64.33"
+  primary_dns      = "100.64.62.199"
+  }
 ]
 
 sysconfig_policies = [
@@ -38,6 +47,11 @@ version_policies = [
     description     = "K8S 1.20 - Required for AppD-IWO Interop"
     policyName      = "tf-iks-1-20-4" #"tf-iks-ob-latest"
     iksVersionName  = "1.20.14-iks.4" # "1.21.10-iks.0"
+  }
+  {
+    description     = "K8S 1.21.11"
+    policyName      = "tf-iks-1-21-11" #"tf-iks-ob-latest"
+    iksVersionName  = "1.21.11-iks.2"
   }
 ]
 
