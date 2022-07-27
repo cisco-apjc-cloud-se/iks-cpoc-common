@@ -77,7 +77,7 @@ instance_type_policies = [
   {
     description = "IKS ESXi VM sized for SMM"
     name        = "tf-iks-10C-64G-60G"
-    cpu         = 10
+    cpu         = 8
     memory      = 65536
     disk_size   = 60
   }
